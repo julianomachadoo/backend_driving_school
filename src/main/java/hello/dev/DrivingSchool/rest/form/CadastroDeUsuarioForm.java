@@ -2,7 +2,7 @@ package hello.dev.DrivingSchool.rest.form;
 
 import java.time.LocalDate;
 
-public class CadastroDeAlunoForm {
+public class CadastroDeUsuarioForm {
 
     private String nome;
     private String email;
@@ -14,6 +14,7 @@ public class CadastroDeAlunoForm {
     private String cep;
     private String numero;
     private String cidade;
+    private String tipoUsuario;
 
     public String getNome() {
         return nome;
@@ -53,5 +54,9 @@ public class CadastroDeAlunoForm {
 
     public String getCidade() {
         return cidade;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
     }
 }

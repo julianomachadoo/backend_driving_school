@@ -1,6 +1,6 @@
 package hello.dev.DrivingSchool.rest.form;
 
-public class AtualizaAlunoForm {
+public class AtualizaUsuarioForm {
 
     private String nome;
     private String email;
@@ -10,6 +10,7 @@ public class AtualizaAlunoForm {
     private String cep;
     private String numero;
     private String cidade;
+    private String tipoUsuario;
 
     public String getNome() {
         return nome;
