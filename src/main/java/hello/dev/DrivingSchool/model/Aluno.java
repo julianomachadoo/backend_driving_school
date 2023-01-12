@@ -2,23 +2,23 @@ package hello.dev.DrivingSchool.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @DiscriminatorValue("aluno")
 public class Aluno extends Usuario {
 
-   @ElementCollection(targetClass = TipoCNH.class)
+    @ElementCollection(targetClass = TipoCNH.class)
     @JoinTable(name = "tblTipoCNH", joinColumns = @JoinColumn(name = "cpfAluno"))
     @Column(name = "tipoCNH", nullable = false)
     @Enumerated(EnumType.STRING)
-    private List<TipoCNH> tipoCNHList = new ArrayList<>();
+    private Set<TipoCNH> tipoCNHList = new HashSet<>();
 
     public Aluno() {
     }
 
-    public List<TipoCNH> getTipoCNHList() {
+    public Set<TipoCNH> getTipoCNHList() {
         return tipoCNHList;
     }
 
