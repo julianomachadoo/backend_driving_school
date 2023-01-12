@@ -10,7 +10,7 @@ public class AtualizaUsuarioForm {
     private String cep;
     private String numero;
     private String cidade;
-    private String tipoUsuario;
+    private String complemento;
 
     public String getNome() {
         return nome;
@@ -43,4 +43,9 @@ public class AtualizaUsuarioForm {
     public String getCidade() {
         return cidade;
     }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
 }

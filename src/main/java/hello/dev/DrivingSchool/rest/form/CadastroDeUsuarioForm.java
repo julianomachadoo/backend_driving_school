@@ -15,6 +15,7 @@ public class CadastroDeUsuarioForm {
     private String cep;
     private String numero;
     private String cidade;
+    private String complemento;
     private String tipoUsuario;
     private List<String> tiposCNH;
 
@@ -56,6 +57,10 @@ public class CadastroDeUsuarioForm {
 
     public String getCidade() {
         return cidade;
+    }
+
+    public String getComplemento() {
+        return complemento;
     }
 
     public String getTipoUsuario() {

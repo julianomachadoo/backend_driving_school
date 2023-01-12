@@ -24,6 +24,7 @@ public abstract class UsuarioService {
         if (atualizaUsuarioForm.getCep() != null) usuarioEncontrado.getEndereco().setCEP(atualizaUsuarioForm.getCep());
         if (atualizaUsuarioForm.getNumero() != null) usuarioEncontrado.getEndereco().setNumero(Integer.parseInt(atualizaUsuarioForm.getNumero()));
         if (atualizaUsuarioForm.getCidade() != null) usuarioEncontrado.getEndereco().setCidade(atualizaUsuarioForm.getCidade());
+        if (atualizaUsuarioForm.getComplemento() != null) usuarioEncontrado.getEndereco().setComplemento(atualizaUsuarioForm.getComplemento());
     }
 }
 

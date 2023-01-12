@@ -24,8 +24,9 @@ public class AdministrativoService extends UsuarioService {
                 new Endereco(cadastroDeUsuarioForm.getLogradouro(),
                         cadastroDeUsuarioForm.getCep(),
                         cadastroDeUsuarioForm.getNumero(),
-                        cadastroDeUsuarioForm.getCidade())
-        );
+                        cadastroDeUsuarioForm.getCidade(),
+                        cadastroDeUsuarioForm.getComplemento()
+                ));
         administrativo.setTelefone(cadastroDeUsuarioForm.getTelefone());
         return usuarioRepository.save(administrativo);
     }

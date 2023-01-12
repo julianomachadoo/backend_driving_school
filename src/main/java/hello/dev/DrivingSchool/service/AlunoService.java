@@ -26,8 +26,9 @@ public class AlunoService extends UsuarioService {
                 new Endereco(cadastroDeUsuarioForm.getLogradouro(),
                         cadastroDeUsuarioForm.getCep(),
                         cadastroDeUsuarioForm.getNumero(),
-                        cadastroDeUsuarioForm.getCidade())
-        );
+                        cadastroDeUsuarioForm.getCidade(),
+                        cadastroDeUsuarioForm.getComplemento()
+        ));
         aluno.setTelefone(cadastroDeUsuarioForm.getTelefone());
         cadastroDeUsuarioForm.getTiposCNH().forEach(t -> aluno.addTipoCNH(TipoCNH.valueOf(t)));
         return usuarioRepository.save(aluno);

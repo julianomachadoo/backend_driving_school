@@ -25,8 +25,10 @@ public class InstrutorService extends UsuarioService {
                 new Endereco(cadastroDeUsuarioForm.getLogradouro(),
                         cadastroDeUsuarioForm.getCep(),
                         cadastroDeUsuarioForm.getNumero(),
-                        cadastroDeUsuarioForm.getCidade())
-        );
+                        cadastroDeUsuarioForm.getCidade(),
+                        cadastroDeUsuarioForm.getComplemento()
+
+                ));
         instrutor.setTelefone(cadastroDeUsuarioForm.getTelefone());
         return usuarioRepository.save(instrutor);
     }

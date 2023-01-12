@@ -24,7 +24,7 @@ public class CommandRunner implements CommandLineRunner {
         aluno.setSenha("123456");
         aluno.setTelefone("79-99999-9999");
         aluno.setEndereco(
-                new Endereco("Rua de exemplo", "49000-000", 1111, "Cidade"));
+                new Endereco("Rua de exemplo", "49000-000", 1111, "Cidade", "complemento"));
         aluno.addTipoCNH(TipoCNH.A);
         aluno.addTipoCNH(TipoCNH.B);
         usuarioRepository.save(aluno);
@@ -37,7 +37,7 @@ public class CommandRunner implements CommandLineRunner {
         instrutor.setSenha("123456");
         instrutor.setTelefone("79-99999-9999");
         instrutor.setEndereco(
-                new Endereco("Rua de exemplo", "49000-000", 1111, "Cidade"));
+                new Endereco("Rua de exemplo", "49000-000", 1111, "Cidade", "complemento"));
         usuarioRepository.save(instrutor);
 
         Administrativo administrativo = new Administrativo();
@@ -48,7 +48,7 @@ public class CommandRunner implements CommandLineRunner {
         administrativo.setSenha("123456");
         administrativo.setTelefone("79-99999-9999");
         administrativo.setEndereco(
-                new Endereco("Rua de exemplo", "49000-000", 1111, "Cidade"));
+                new Endereco("Rua de exemplo", "49000-000", 1111, "Cidade", "complemento"));
         usuarioRepository.save(administrativo);
     }
 }
