@@ -1,12 +1,19 @@
 package hello.dev.DrivingSchool.rest.form;
 
+import jakarta.validation.constraints.Pattern;
+import org.hibernate.validator.constraints.Length;
+
 public class AtualizaUsuarioForm {
 
+    @Length(max = 50)
     private String nome;
+    @Pattern(regexp = "^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email inválido!")
     private String email;
     private String senha;
+    @Pattern(regexp = "\\d{10,11}", message = "Telefone inválido")
     private String telefone;
     private String logradouro;
+    @Pattern(regexp = "\\d{5}-\\d{3}", message = "CEP inválido")
     private String cep;
     private String numero;
     private String cidade;

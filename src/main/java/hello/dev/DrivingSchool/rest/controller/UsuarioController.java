@@ -7,6 +7,7 @@ import hello.dev.DrivingSchool.rest.form.CadastroDeUsuarioForm;
 import hello.dev.DrivingSchool.service.AdministrativoService;
 import hello.dev.DrivingSchool.service.AlunoService;
 import hello.dev.DrivingSchool.service.InstrutorService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +32,7 @@ public class UsuarioController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<?> cadastroDeUsuario(@RequestBody CadastroDeUsuarioForm cadastroDeUsuarioForm,
+    public ResponseEntity<?> cadastroDeUsuario(@RequestBody @Valid CadastroDeUsuarioForm cadastroDeUsuarioForm,
                                                UriComponentsBuilder uriComponentsBuilder) {
         if (TipoUsuario.valueOf(cadastroDeUsuarioForm.getTipoUsuario().toUpperCase()) == TipoUsuario.ALUNO) {
             Usuario aluno = alunoService.cadastrar(cadastroDeUsuarioForm);
@@ -56,7 +57,7 @@ public class UsuarioController {
     @PutMapping("/{cpf}")
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizaUsuario(@RequestBody AtualizaUsuarioForm atualizaUsuarioForm, @PathVariable String cpf) {
+    public void atualizaUsuario(@RequestBody @Valid AtualizaUsuarioForm atualizaUsuarioForm, @PathVariable String cpf) {
         alunoService.atualizaUsuario(atualizaUsuarioForm, cpf);
     }
 }
