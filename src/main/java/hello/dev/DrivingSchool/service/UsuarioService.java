@@ -9,12 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 public abstract class UsuarioService {
 
     @Autowired
-    UsuarioRepository repository;
+    UsuarioRepository usuarioRepository;
 
     public abstract Usuario cadastrar(CadastroDeUsuarioForm cadastroDeUsuarioForm);
 
     public void atualizaUsuario(AtualizaUsuarioForm atualizaUsuarioForm, String cpf) {
-        Usuario usuarioEncontrado = repository.getReferenceById(cpf);
+        Usuario usuarioEncontrado = usuarioRepository.getReferenceById(cpf);
 
         if (atualizaUsuarioForm.getNome() != null) usuarioEncontrado.setNome(atualizaUsuarioForm.getNome());
         if (atualizaUsuarioForm.getEmail() != null) usuarioEncontrado.setEmail(atualizaUsuarioForm.getEmail());

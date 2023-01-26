@@ -3,15 +3,11 @@ package hello.dev.DrivingSchool.service;
 import hello.dev.DrivingSchool.model.Administrativo;
 import hello.dev.DrivingSchool.model.Endereco;
 import hello.dev.DrivingSchool.model.Usuario;
-import hello.dev.DrivingSchool.repository.UsuarioRepository;
 import hello.dev.DrivingSchool.rest.form.CadastroDeUsuarioForm;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AdministrativoService extends UsuarioService {
-    @Autowired
-    UsuarioRepository usuarioRepository;
 
     public Usuario cadastrar(CadastroDeUsuarioForm cadastroDeUsuarioForm) {
         Administrativo administrativo = new Administrativo();

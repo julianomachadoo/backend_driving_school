@@ -31,22 +31,22 @@ public class UsuarioController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<?> cadastroDeUsuario(@RequestBody CadastroDeUsuarioForm cadastroDeAlunoForm,
+    public ResponseEntity<?> cadastroDeUsuario(@RequestBody CadastroDeUsuarioForm cadastroDeUsuarioForm,
                                                UriComponentsBuilder uriComponentsBuilder) {
-        if (TipoUsuario.valueOf(cadastroDeAlunoForm.getTipoUsuario()) == TipoUsuario.ALUNO) {
-            Usuario aluno = alunoService.cadastrar(cadastroDeAlunoForm);
+        if (TipoUsuario.valueOf(cadastroDeUsuarioForm.getTipoUsuario().toUpperCase()) == TipoUsuario.ALUNO) {
+            Usuario aluno = alunoService.cadastrar(cadastroDeUsuarioForm);
             URI uri = uriComponentsBuilder.path("/pessoas").buildAndExpand().toUri();
             return ResponseEntity.created(uri).body(aluno);
         }
 
-        if (TipoUsuario.valueOf(cadastroDeAlunoForm.getTipoUsuario()) == TipoUsuario.INSTRUTOR) {
-            Usuario instrutor = instrutorService.cadastrar(cadastroDeAlunoForm);
+        if (TipoUsuario.valueOf(cadastroDeUsuarioForm.getTipoUsuario()) == TipoUsuario.INSTRUTOR) {
+            Usuario instrutor = instrutorService.cadastrar(cadastroDeUsuarioForm);
             URI uri = uriComponentsBuilder.path("/pessoas").buildAndExpand().toUri();
             return ResponseEntity.created(uri).body(instrutor);
         }
 
-        if (TipoUsuario.valueOf(cadastroDeAlunoForm.getTipoUsuario()) == TipoUsuario.ADMINISTRATIVO) {
-            Usuario administrativo = administrativoService.cadastrar(cadastroDeAlunoForm);
+        if (TipoUsuario.valueOf(cadastroDeUsuarioForm.getTipoUsuario()) == TipoUsuario.ADMINISTRATIVO) {
+            Usuario administrativo = administrativoService.cadastrar(cadastroDeUsuarioForm);
             URI uri = uriComponentsBuilder.path("/pessoas").buildAndExpand().toUri();
             return ResponseEntity.created(uri).body(administrativo);
         }

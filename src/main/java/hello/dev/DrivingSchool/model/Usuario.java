@@ -7,8 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="tipo_de_usuario",
-        discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name = "tipo_de_usuario", discriminatorType = DiscriminatorType.STRING)
 public class Usuario {
 
     private String nome;
