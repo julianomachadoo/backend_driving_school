@@ -22,7 +22,7 @@ public abstract class UsuarioService {
     public abstract Usuario cadastrar(CadastroDeUsuarioForm cadastroDeUsuarioForm);
 
     public List<UsuarioDTO> pesquisaPorNome(String nome) {
-        return usuarioRepository.findByNome(nome);
+        return usuarioRepository.findByNomeContainingIgnoreCase(nome).stream().map(this::converterUsuario).collect(Collectors.toList());
     }
 
     public void atualizaUsuario(AtualizaUsuarioForm atualizaUsuarioForm, String id) {
