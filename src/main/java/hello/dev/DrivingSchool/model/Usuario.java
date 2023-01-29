@@ -10,10 +10,11 @@ import java.util.Objects;
 @DiscriminatorColumn(name = "tipo_de_usuario", discriminatorType = DiscriminatorType.STRING)
 public class Usuario {
 
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nome;
     private String email;
     private String senha;
-    @Id
     private String cpf;
     private LocalDate dataDeNascimento;
     private LocalDate dataCadastro = LocalDate.now();
@@ -22,6 +23,14 @@ public class Usuario {
     private String telefone;
 
     public Usuario() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {

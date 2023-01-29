@@ -10,7 +10,7 @@ import java.util.Set;
 public class Aluno extends Usuario {
 
     @ElementCollection(targetClass = TipoCNH.class)
-    @JoinTable(name = "tblTipoCNH", joinColumns = @JoinColumn(name = "cpfAluno"))
+    @JoinTable(name = "tblTipoCNH", joinColumns = @JoinColumn(name = "idAluno"))
     @Column(name = "tipoCNH", nullable = false)
     @Enumerated(EnumType.STRING)
     private Set<TipoCNH> tipoCNHList = new HashSet<>();
