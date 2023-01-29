@@ -1,16 +1,12 @@
 package hello.dev.DrivingSchool.service;
 
-import hello.dev.DrivingSchool.model.Aluno;
 import hello.dev.DrivingSchool.model.Usuario;
 import hello.dev.DrivingSchool.repository.UsuarioRepository;
-import hello.dev.DrivingSchool.rest.dto.UsuarioDTO;
 import hello.dev.DrivingSchool.rest.form.AtualizaUsuarioForm;
 import hello.dev.DrivingSchool.rest.form.CadastroDeUsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
 
@@ -20,10 +16,6 @@ public abstract class UsuarioService {
     UsuarioRepository usuarioRepository;
 
     public abstract Usuario cadastrar(CadastroDeUsuarioForm cadastroDeUsuarioForm);
-
-    public List<UsuarioDTO> pesquisaPorNome(String nome) {
-        return usuarioRepository.findByNomeContainingIgnoreCase(nome).stream().map(this::converterUsuario).collect(Collectors.toList());
-    }
 
     public void atualizaUsuario(AtualizaUsuarioForm atualizaUsuarioForm, String id) {
         Usuario usuarioEncontrado = usuarioRepository.getReferenceById(id);
@@ -42,29 +34,6 @@ public abstract class UsuarioService {
     protected LocalDate converterData (String data) {
         String[] split = data.split("-");
         return LocalDate.of(parseInt(split[2]), parseInt(split[1]), parseInt(split[0]));
-    }
-
-    protected UsuarioDTO converterUsuario (Usuario usuario) {
-        UsuarioDTO usuarioDTO = new UsuarioDTO(
-                usuario.getId(),
-                usuario.getNome(),
-                usuario.getEmail(),
-                usuario.getSenha(),
-                usuario.getCpf(),
-                usuario.getDataDeNascimento(),
-                usuario.getDataCadastro(),
-                usuario.getEndereco(),
-                usuario.getTelefone()
-        );
-
-        if (usuario.getClass().equals(Aluno.class)) {
-            ((Aluno) usuario).getTipoCNHList().forEach(tipoCNH -> usuarioDTO.getTipoCNHList().add(tipoCNH));
-        }
-        return usuarioDTO;
-    }
-
-    public List<UsuarioDTO> listarTodos() {
-        return usuarioRepository.findAll().stream().map(this::converterUsuario).collect(Collectors.toList());
     }
 }
 
