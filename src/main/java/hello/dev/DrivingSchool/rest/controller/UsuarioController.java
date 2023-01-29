@@ -2,11 +2,13 @@ package hello.dev.DrivingSchool.rest.controller;
 
 import hello.dev.DrivingSchool.model.TipoUsuario;
 import hello.dev.DrivingSchool.model.Usuario;
+import hello.dev.DrivingSchool.rest.dto.UsuarioDTO;
 import hello.dev.DrivingSchool.rest.form.AtualizaUsuarioForm;
 import hello.dev.DrivingSchool.rest.form.CadastroDeUsuarioForm;
 import hello.dev.DrivingSchool.service.AdministrativoService;
 import hello.dev.DrivingSchool.service.AlunoService;
 import hello.dev.DrivingSchool.service.InstrutorService;
+import hello.dev.DrivingSchool.service.TodosUsuariosService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,10 +18,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("usuario")
 public class UsuarioController {
+
+    @Autowired
+    private TodosUsuariosService todosUsuariosService;
 
     @Autowired
     private AlunoService alunoService;
@@ -29,6 +35,25 @@ public class UsuarioController {
 
     @Autowired
     private AdministrativoService administrativoService;
+
+    @GetMapping
+    public List<UsuarioDTO> pesquisaPorNomeCPFOuEmail(@RequestParam(required = false) String nome,
+                                                      @RequestParam(required = false) String cpf,
+                                                      @RequestParam(required = false) String email) {
+        if (nome != null) {
+            return todosUsuariosService.pesquisaPorNome(nome);
+        }
+
+//        if (cpf != null) {
+//            return usuarioService.pesquisaPorCPF(cpf);
+//        }
+//
+//        if (email != null) {
+//            return usuarioService.pesquisaPorEmail(email);
+//        }
+//
+        return todosUsuariosService.listarTodos();
+    }
 
     @PostMapping
     @Transactional
@@ -58,6 +83,6 @@ public class UsuarioController {
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void atualizaUsuario(@RequestBody @Valid AtualizaUsuarioForm atualizaUsuarioForm, @PathVariable String id) {
-        alunoService.atualizaUsuario(atualizaUsuarioForm, id);
+        todosUsuariosService.atualizaUsuario(atualizaUsuarioForm, id);
     }
 }
