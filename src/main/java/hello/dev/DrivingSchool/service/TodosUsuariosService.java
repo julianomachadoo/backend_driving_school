@@ -7,6 +7,7 @@ import hello.dev.DrivingSchool.rest.dto.UsuarioDTO;
 import hello.dev.DrivingSchool.rest.form.CadastroDeUsuarioForm;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +41,15 @@ public class TodosUsuariosService extends UsuarioService{
 
     public List<UsuarioDTO> pesquisaPorEmail(String email) {
         List<UsuarioDTO> usuarios = usuarioRepository.findByEmailContainingIgnoreCase(email).stream().map(this::converterUsuario).collect(Collectors.toList());
+        if (usuarios.isEmpty()) throw new DadosNaoEncontradosException("Usuario não encontrado");
+        return usuarios;
+    }
+
+
+    public List<UsuarioDTO> pesquisaPorData(String dataInicio, String dataFim) {
+        LocalDate localDateInicio = converterData(dataInicio);
+        LocalDate localDateFim = converterData(dataFim);
+        List<UsuarioDTO> usuarios = usuarioRepository.encontrarPorData(localDateInicio, localDateFim).stream().map(this::converterUsuario).toList();
         if (usuarios.isEmpty()) throw new DadosNaoEncontradosException("Usuario não encontrado");
         return usuarios;
     }

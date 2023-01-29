@@ -15,7 +15,7 @@ public class CommandRunner implements CommandLineRunner {
     UsuarioRepository usuarioRepository;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Aluno aluno = new Aluno();
         aluno.setCpf("111.111.111-11");
         aluno.setNome("Fulano");
@@ -27,6 +27,7 @@ public class CommandRunner implements CommandLineRunner {
                 new Endereco("Rua de exemplo", "49000-000", 1111, "Cidade", "complemento"));
         aluno.addTipoCNH(TipoCNH.A);
         aluno.addTipoCNH(TipoCNH.B);
+        aluno.setDataCadastro(LocalDate.of(2022, 1, 13));
         usuarioRepository.save(aluno);
 
         Instrutor instrutor = new Instrutor();
@@ -38,6 +39,7 @@ public class CommandRunner implements CommandLineRunner {
         instrutor.setTelefone("79-99999-9999");
         instrutor.setEndereco(
                 new Endereco("Rua de exemplo", "49000-000", 1111, "Cidade", "complemento"));
+        instrutor.setDataCadastro(LocalDate.of(2022, 6, 13));
         usuarioRepository.save(instrutor);
 
         Administrativo administrativo = new Administrativo();

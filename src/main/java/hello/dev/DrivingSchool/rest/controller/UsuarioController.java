@@ -55,6 +55,13 @@ public class UsuarioController {
         return todosUsuariosService.listarTodos();
     }
 
+    @GetMapping("/data")
+    public List<UsuarioDTO> pesquisaPorData (@RequestParam String dataInicio,
+                                             @RequestParam String dataFim) {
+        return todosUsuariosService.pesquisaPorData(dataInicio, dataFim);
+    }
+
+
     @PostMapping
     @Transactional
     public ResponseEntity<?> cadastroDeUsuario(@RequestBody @Valid CadastroDeUsuarioForm cadastroDeUsuarioForm,
