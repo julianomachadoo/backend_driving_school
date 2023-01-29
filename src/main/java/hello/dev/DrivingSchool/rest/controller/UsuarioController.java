@@ -47,11 +47,11 @@ public class UsuarioController {
         if (cpf != null) {
             return todosUsuariosService.pesquisaPorCPF(cpf);
         }
-//
-//        if (email != null) {
-//            return todosUsuariosService.pesquisaPorEmail(email);
-//        }
-//
+
+        if (email != null) {
+            return todosUsuariosService.pesquisaPorEmail(email);
+        }
+
         return todosUsuariosService.listarTodos();
     }
 

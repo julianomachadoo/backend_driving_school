@@ -21,17 +21,27 @@ public class TodosUsuariosService extends UsuarioService{
     }
 
     public List<UsuarioDTO> listarTodos() {
-        return usuarioRepository.findAll().stream().map(this::converterUsuario).collect(Collectors.toList());
+        List<UsuarioDTO> usuarios = usuarioRepository.findAll().stream().map(this::converterUsuario).toList();
+        if (usuarios.isEmpty()) throw new DadosNaoEncontradosException("Usuario não encontrado");
+        return usuarios;
     }
 
     public List<UsuarioDTO> pesquisaPorNome(String nome) {
-        return usuarioRepository.findByNomeContainingIgnoreCase(nome).stream().map(this::converterUsuario).collect(Collectors.toList());
+        List<UsuarioDTO> usuarios = usuarioRepository.findByNomeContainingIgnoreCase(nome).stream().map(this::converterUsuario).toList();
+        if (usuarios.isEmpty()) throw new DadosNaoEncontradosException("Usuario não encontrado");
+        return usuarios;
     }
 
     public List<UsuarioDTO> pesquisaPorCPF(String cpf) {
         Optional<Usuario> usuario = usuarioRepository.findByCpf(cpf);
         if (usuario.isEmpty()) throw new DadosNaoEncontradosException("Usuario não encontrado");
         return Collections.singletonList(converterUsuario(usuario.get()));
+    }
+
+    public List<UsuarioDTO> pesquisaPorEmail(String email) {
+        List<UsuarioDTO> usuarios = usuarioRepository.findByEmailContainingIgnoreCase(email).stream().map(this::converterUsuario).collect(Collectors.toList());
+        if (usuarios.isEmpty()) throw new DadosNaoEncontradosException("Usuario não encontrado");
+        return usuarios;
     }
 
     protected UsuarioDTO converterUsuario (Usuario usuario) {
