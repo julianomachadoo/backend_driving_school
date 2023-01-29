@@ -64,7 +64,8 @@ public class TodosUsuariosService extends UsuarioService{
                 usuario.getDataDeNascimento(),
                 usuario.getDataCadastro(),
                 usuario.getEndereco(),
-                usuario.getTelefone()
+                usuario.getTelefone(),
+                usuario.getClass().toString().substring(36)
         );
 
         if (usuario.getClass().equals(Aluno.class)) {

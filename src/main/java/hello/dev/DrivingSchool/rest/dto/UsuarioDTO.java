@@ -18,9 +18,10 @@ public class UsuarioDTO {
     private LocalDate dataCadastro;
     private Endereco endereco;
     private String telefone;
+    private String tipoUsuario;
     private Set<TipoCNH> tipoCNHList = new HashSet<>();
 
-    public UsuarioDTO(Long id, String nome, String email, String senha, String cpf, LocalDate dataDeNascimento, LocalDate dataCadastro, Endereco endereco, String telefone) {
+    public UsuarioDTO(Long id, String nome, String email, String senha, String cpf, LocalDate dataDeNascimento, LocalDate dataCadastro, Endereco endereco, String telefone, String tipoUsuario) {
         this.id = id;
         this.nome = nome;
         this.email = email;
@@ -30,6 +31,7 @@ public class UsuarioDTO {
         this.dataCadastro = dataCadastro;
         this.endereco = endereco;
         this.telefone = telefone;
+        this.tipoUsuario = tipoUsuario;
     }
 
     public Long getId() {
@@ -102,6 +104,14 @@ public class UsuarioDTO {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     public Set<TipoCNH> getTipoCNHList() {
