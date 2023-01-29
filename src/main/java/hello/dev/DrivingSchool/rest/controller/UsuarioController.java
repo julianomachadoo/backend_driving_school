@@ -44,12 +44,12 @@ public class UsuarioController {
             return todosUsuariosService.pesquisaPorNome(nome);
         }
 
-//        if (cpf != null) {
-//            return usuarioService.pesquisaPorCPF(cpf);
-//        }
+        if (cpf != null) {
+            return todosUsuariosService.pesquisaPorCPF(cpf);
+        }
 //
 //        if (email != null) {
-//            return usuarioService.pesquisaPorEmail(email);
+//            return todosUsuariosService.pesquisaPorEmail(email);
 //        }
 //
         return todosUsuariosService.listarTodos();

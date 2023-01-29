@@ -1,5 +1,6 @@
 package hello.dev.DrivingSchool.rest.controller;
 
+import hello.dev.DrivingSchool.exceptions.DadosNaoEncontradosException;
 import hello.dev.DrivingSchool.rest.dto.ApiErrorsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -21,8 +22,8 @@ public class ApplicationControllerAdvice {
     @Autowired
     MessageSource messageSource;
 
-    @ResponseStatus(code = BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(code = BAD_REQUEST)
     public List<ApiErrorsDTO> handle(MethodArgumentNotValidException exception) {
         List<ApiErrorsDTO> dto = new ArrayList<>();
         List<FieldError> fieldErrors = exception.getBindingResult().getFieldErrors();
@@ -32,5 +33,11 @@ public class ApplicationControllerAdvice {
             dto.add(erro);
         });
         return dto;
+    }
+
+    @ExceptionHandler(DadosNaoEncontradosException.class)
+    @ResponseStatus(code = BAD_REQUEST)
+    public ApiErrorsDTO handleDadosNaoEncontradosException(DadosNaoEncontradosException ex) {
+        return new ApiErrorsDTO(null, ex.getMessage());
     }
 }
