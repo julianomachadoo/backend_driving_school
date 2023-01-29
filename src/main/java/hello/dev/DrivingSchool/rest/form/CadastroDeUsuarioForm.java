@@ -22,7 +22,7 @@ public class CadastroDeUsuarioForm {
     @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "CPF inválido!")
     private String cpf;
     @NotNull
-    private LocalDate dataDeNascimento;
+    private String dataDeNascimento;
     @NotBlank
     @Pattern(regexp = "\\d{10,11}", message = "Telefone inválido")
     private String telefone;
@@ -54,7 +54,7 @@ public class CadastroDeUsuarioForm {
         return cpf;
     }
 
-    public LocalDate getDataDeNascimento() {
+    public String getDataDeNascimento() {
         return dataDeNascimento;
     }
 

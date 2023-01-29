@@ -15,7 +15,7 @@ public class AdministrativoService extends UsuarioService {
         administrativo.setEmail(cadastroDeUsuarioForm.getEmail());
         administrativo.setSenha(cadastroDeUsuarioForm.getSenha());
         administrativo.setCpf(cadastroDeUsuarioForm.getCpf());
-        administrativo.setDataDeNascimento(cadastroDeUsuarioForm.getDataDeNascimento());
+        administrativo.setDataDeNascimento(converterData(cadastroDeUsuarioForm.getDataDeNascimento()));
         administrativo.setEndereco(
                 new Endereco(cadastroDeUsuarioForm.getLogradouro(),
                         cadastroDeUsuarioForm.getCep(),

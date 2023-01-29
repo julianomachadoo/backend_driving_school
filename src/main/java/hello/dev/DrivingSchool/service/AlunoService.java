@@ -16,7 +16,7 @@ public class AlunoService extends UsuarioService {
         aluno.setEmail(cadastroDeUsuarioForm.getEmail());
         aluno.setSenha(cadastroDeUsuarioForm.getSenha());
         aluno.setCpf(cadastroDeUsuarioForm.getCpf());
-        aluno.setDataDeNascimento(cadastroDeUsuarioForm.getDataDeNascimento());
+        aluno.setDataDeNascimento(converterData(cadastroDeUsuarioForm.getDataDeNascimento()));
         aluno.setEndereco(
                 new Endereco(cadastroDeUsuarioForm.getLogradouro(),
                         cadastroDeUsuarioForm.getCep(),

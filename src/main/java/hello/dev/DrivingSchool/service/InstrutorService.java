@@ -15,7 +15,7 @@ public class InstrutorService extends UsuarioService {
         instrutor.setEmail(cadastroDeUsuarioForm.getEmail());
         instrutor.setSenha(cadastroDeUsuarioForm.getSenha());
         instrutor.setCpf(cadastroDeUsuarioForm.getCpf());
-        instrutor.setDataDeNascimento(cadastroDeUsuarioForm.getDataDeNascimento());
+        instrutor.setDataDeNascimento(converterData(cadastroDeUsuarioForm.getDataDeNascimento()));
         instrutor.setEndereco(
                 new Endereco(cadastroDeUsuarioForm.getLogradouro(),
                         cadastroDeUsuarioForm.getCep(),

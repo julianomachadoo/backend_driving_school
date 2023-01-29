@@ -6,6 +6,10 @@ import hello.dev.DrivingSchool.rest.form.AtualizaUsuarioForm;
 import hello.dev.DrivingSchool.rest.form.CadastroDeUsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
+
+import static java.lang.Integer.parseInt;
+
 public abstract class UsuarioService {
 
     @Autowired
@@ -13,8 +17,8 @@ public abstract class UsuarioService {
 
     public abstract Usuario cadastrar(CadastroDeUsuarioForm cadastroDeUsuarioForm);
 
-    public void atualizaUsuario(AtualizaUsuarioForm atualizaUsuarioForm, String cpf) {
-        Usuario usuarioEncontrado = usuarioRepository.getReferenceById(cpf);
+    public void atualizaUsuario(AtualizaUsuarioForm atualizaUsuarioForm, String id) {
+        Usuario usuarioEncontrado = usuarioRepository.getReferenceById(id);
 
         if (atualizaUsuarioForm.getNome() != null) usuarioEncontrado.setNome(atualizaUsuarioForm.getNome());
         if (atualizaUsuarioForm.getEmail() != null) usuarioEncontrado.setEmail(atualizaUsuarioForm.getEmail());
@@ -22,9 +26,14 @@ public abstract class UsuarioService {
         if (atualizaUsuarioForm.getTelefone() != null) usuarioEncontrado.setTelefone(atualizaUsuarioForm.getTelefone());
         if (atualizaUsuarioForm.getLogradouro() != null) usuarioEncontrado.getEndereco().setLogradouro(atualizaUsuarioForm.getLogradouro());
         if (atualizaUsuarioForm.getCep() != null) usuarioEncontrado.getEndereco().setCEP(atualizaUsuarioForm.getCep());
-        if (atualizaUsuarioForm.getNumero() != null) usuarioEncontrado.getEndereco().setNumero(Integer.parseInt(atualizaUsuarioForm.getNumero()));
+        if (atualizaUsuarioForm.getNumero() != null) usuarioEncontrado.getEndereco().setNumero(parseInt(atualizaUsuarioForm.getNumero()));
         if (atualizaUsuarioForm.getCidade() != null) usuarioEncontrado.getEndereco().setCidade(atualizaUsuarioForm.getCidade());
         if (atualizaUsuarioForm.getComplemento() != null) usuarioEncontrado.getEndereco().setComplemento(atualizaUsuarioForm.getComplemento());
+    }
+
+    public LocalDate converterData (String data) {
+        String[] split = data.split("-");
+        return LocalDate.of(parseInt(split[2]), parseInt(split[1]), parseInt(split[0]));
     }
 }
 
