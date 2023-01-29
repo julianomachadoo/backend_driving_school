@@ -40,13 +40,13 @@ public class UsuarioController {
             return ResponseEntity.created(uri).body(aluno);
         }
 
-        if (TipoUsuario.valueOf(cadastroDeUsuarioForm.getTipoUsuario()) == TipoUsuario.INSTRUTOR) {
+        if (TipoUsuario.valueOf(cadastroDeUsuarioForm.getTipoUsuario().toUpperCase()) == TipoUsuario.INSTRUTOR) {
             Usuario instrutor = instrutorService.cadastrar(cadastroDeUsuarioForm);
             URI uri = uriComponentsBuilder.path("/pessoas").buildAndExpand().toUri();
             return ResponseEntity.created(uri).body(instrutor);
         }
 
-        if (TipoUsuario.valueOf(cadastroDeUsuarioForm.getTipoUsuario()) == TipoUsuario.ADMINISTRATIVO) {
+        if (TipoUsuario.valueOf(cadastroDeUsuarioForm.getTipoUsuario().toUpperCase()) == TipoUsuario.ADMINISTRATIVO) {
             Usuario administrativo = administrativoService.cadastrar(cadastroDeUsuarioForm);
             URI uri = uriComponentsBuilder.path("/pessoas").buildAndExpand().toUri();
             return ResponseEntity.created(uri).body(administrativo);
@@ -54,10 +54,10 @@ public class UsuarioController {
         throw new IllegalArgumentException();
     }
 
-    @PutMapping("/{cpf}")
+    @PutMapping("/{id}")
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizaUsuario(@RequestBody @Valid AtualizaUsuarioForm atualizaUsuarioForm, @PathVariable String cpf) {
-        alunoService.atualizaUsuario(atualizaUsuarioForm, cpf);
+    public void atualizaUsuario(@RequestBody @Valid AtualizaUsuarioForm atualizaUsuarioForm, @PathVariable String id) {
+        alunoService.atualizaUsuario(atualizaUsuarioForm, id);
     }
 }
