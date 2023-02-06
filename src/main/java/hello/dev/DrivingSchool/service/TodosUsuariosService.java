@@ -7,6 +7,7 @@ import hello.dev.DrivingSchool.model.Usuario;
 import hello.dev.DrivingSchool.rest.dto.UsuarioDTO;
 import hello.dev.DrivingSchool.rest.form.AtualizaUsuarioForm;
 import hello.dev.DrivingSchool.rest.form.CadastroDeUsuarioForm;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -83,6 +84,14 @@ public class TodosUsuariosService extends UsuarioService {
         if (atualizaUsuarioForm.getNumero() != null) usuarioEncontrado.getEndereco().setNumero(parseInt(atualizaUsuarioForm.getNumero()));
         if (atualizaUsuarioForm.getCidade() != null) usuarioEncontrado.getEndereco().setCidade(atualizaUsuarioForm.getCidade());
         if (atualizaUsuarioForm.getComplemento() != null) usuarioEncontrado.getEndereco().setComplemento(atualizaUsuarioForm.getComplemento());
+    }
+
+    public void removerUsuario(Long id) {
+        try {
+            usuarioRepository.deleteById(String.valueOf(id));
+        } catch (EmptyResultDataAccessException e) {
+            throw new DadosNaoEncontradosException("Usuario não encontrado");
+        }
     }
 
     protected UsuarioDTO converterUsuario(Usuario usuario) {

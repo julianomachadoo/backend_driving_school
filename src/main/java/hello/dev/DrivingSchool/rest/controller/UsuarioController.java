@@ -93,4 +93,11 @@ public class UsuarioController {
 
         todosUsuariosService.atualizaUsuario(atualizaUsuarioForm, id);
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        todosUsuariosService.removerUsuario(id);
+        return ResponseEntity.ok().build();
+    }
 }
