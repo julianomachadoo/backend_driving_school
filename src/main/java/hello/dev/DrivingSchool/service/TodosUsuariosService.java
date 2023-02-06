@@ -2,6 +2,7 @@ package hello.dev.DrivingSchool.service;
 
 import hello.dev.DrivingSchool.exceptions.DadosNaoEncontradosException;
 import hello.dev.DrivingSchool.model.Aluno;
+import hello.dev.DrivingSchool.model.TipoUsuario;
 import hello.dev.DrivingSchool.model.Usuario;
 import hello.dev.DrivingSchool.rest.dto.UsuarioDTO;
 import hello.dev.DrivingSchool.rest.form.AtualizaUsuarioForm;
@@ -49,6 +50,15 @@ public class TodosUsuariosService extends UsuarioService {
                 .findByEmailContainingIgnoreCase(email).stream().map(this::converterUsuario).collect(Collectors.toList());
         if (usuarios.isEmpty()) throw new DadosNaoEncontradosException("Usuario não encontrado");
         return usuarios;
+    }
+
+    public List<UsuarioDTO> pesquisaPorTipoUsuario(String tipoUsuario) {
+        try {
+        TipoUsuario.valueOf(tipoUsuario.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new DadosNaoEncontradosException("Tipo de usuario inválido");
+        }
+        return usuarioRepository.findByTipoDeUsuario(tipoUsuario).stream().map(this::converterUsuario).collect(Collectors.toList());
     }
 
     public List<UsuarioDTO> pesquisaPorData(String dataInicio, String dataFim) {

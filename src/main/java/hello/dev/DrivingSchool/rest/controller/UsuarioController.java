@@ -40,12 +40,13 @@ public class UsuarioController {
     public List<UsuarioDTO> pesquisaPorNomeCPFOuEmail(
             @RequestParam(required = false) String nome,
             @RequestParam(required = false) String cpf,
-            @RequestParam(required = false) String email) {
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String tipoUsuario) {
 
         if (nome != null) return todosUsuariosService.pesquisaPorNome(nome);
         if (cpf != null) return todosUsuariosService.pesquisaPorCPF(cpf);
         if (email != null) return todosUsuariosService.pesquisaPorEmail(email);
-
+        if (tipoUsuario != null) return todosUsuariosService.pesquisaPorTipoUsuario(tipoUsuario);
         return todosUsuariosService.listarTodos();
     }
 

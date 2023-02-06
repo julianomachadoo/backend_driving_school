@@ -15,6 +15,8 @@ public interface UsuarioRepository extends JpaRepository<Usuario, String> {
     List<Usuario> findByNomeContainingIgnoreCase(String nome);
     Optional<Usuario> findByCpf(String cpf);
     List<Usuario> findByEmailContainingIgnoreCase(String email);
-    @Query(value = "select u from Usuario u where u.dataCadastro BETWEEN :startDate AND :endDate")
+    @Query(value = "select * from tbl_usuario u where u.tipo_de_usuario = :tipoDeUsuario", nativeQuery = true)
+    List<Usuario> findByTipoDeUsuario(@Param("tipoDeUsuario") String tipoDeUsuario);
+    @Query(value = "select * from tbl_usuario u where u.data_cadastro BETWEEN :startDate AND :endDate", nativeQuery = true)
     List<Usuario> encontrarPorData(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
 }
