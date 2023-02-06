@@ -37,35 +37,32 @@ public class UsuarioController {
     private AdministrativoService administrativoService;
 
     @GetMapping
-    public List<UsuarioDTO> pesquisaPorNomeCPFOuEmail(@RequestParam(required = false) String nome,
-                                                      @RequestParam(required = false) String cpf,
-                                                      @RequestParam(required = false) String email) {
-        if (nome != null) {
-            return todosUsuariosService.pesquisaPorNome(nome);
-        }
+    public List<UsuarioDTO> pesquisaPorNomeCPFOuEmail(
+            @RequestParam(required = false) String nome,
+            @RequestParam(required = false) String cpf,
+            @RequestParam(required = false) String email) {
 
-        if (cpf != null) {
-            return todosUsuariosService.pesquisaPorCPF(cpf);
-        }
-
-        if (email != null) {
-            return todosUsuariosService.pesquisaPorEmail(email);
-        }
+        if (nome != null) return todosUsuariosService.pesquisaPorNome(nome);
+        if (cpf != null) return todosUsuariosService.pesquisaPorCPF(cpf);
+        if (email != null) return todosUsuariosService.pesquisaPorEmail(email);
 
         return todosUsuariosService.listarTodos();
     }
 
     @GetMapping("/data")
-    public List<UsuarioDTO> pesquisaPorData (@RequestParam String dataInicio,
-                                             @RequestParam String dataFim) {
+    public List<UsuarioDTO> pesquisaPorData(
+            @RequestParam String dataInicio,
+            @RequestParam String dataFim) {
+
         return todosUsuariosService.pesquisaPorData(dataInicio, dataFim);
     }
 
-
     @PostMapping
     @Transactional
-    public ResponseEntity<?> cadastroDeUsuario(@RequestBody @Valid CadastroDeUsuarioForm cadastroDeUsuarioForm,
-                                               UriComponentsBuilder uriComponentsBuilder) {
+    public ResponseEntity<?> cadastroDeUsuario(
+            @RequestBody @Valid CadastroDeUsuarioForm cadastroDeUsuarioForm,
+            UriComponentsBuilder uriComponentsBuilder) {
+
         if (TipoUsuario.valueOf(cadastroDeUsuarioForm.getTipoUsuario().toUpperCase()) == TipoUsuario.ALUNO) {
             Usuario aluno = alunoService.cadastrar(cadastroDeUsuarioForm);
             URI uri = uriComponentsBuilder.path("/pessoas").buildAndExpand().toUri();
@@ -89,7 +86,10 @@ public class UsuarioController {
     @PutMapping("/{id}")
     @Transactional
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void atualizaUsuario(@RequestBody @Valid AtualizaUsuarioForm atualizaUsuarioForm, @PathVariable String id) {
+    public void atualizaUsuario(
+            @RequestBody @Valid AtualizaUsuarioForm atualizaUsuarioForm,
+            @PathVariable String id) {
+
         todosUsuariosService.atualizaUsuario(atualizaUsuarioForm, id);
     }
 }

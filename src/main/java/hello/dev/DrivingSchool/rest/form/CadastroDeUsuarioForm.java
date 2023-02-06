@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class CadastroDeUsuarioForm {
@@ -20,6 +19,7 @@ public class CadastroDeUsuarioForm {
     private String senha;
     @NotBlank
     @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "CPF inválido!")
+//    @CPF
     private String cpf;
     @NotNull
     private String dataDeNascimento;

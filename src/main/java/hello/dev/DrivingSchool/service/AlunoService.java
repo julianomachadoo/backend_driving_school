@@ -17,13 +17,12 @@ public class AlunoService extends UsuarioService {
         aluno.setSenha(cadastroDeUsuarioForm.getSenha());
         aluno.setCpf(cadastroDeUsuarioForm.getCpf());
         aluno.setDataDeNascimento(converterData(cadastroDeUsuarioForm.getDataDeNascimento()));
-        aluno.setEndereco(
-                new Endereco(cadastroDeUsuarioForm.getLogradouro(),
-                        cadastroDeUsuarioForm.getCep(),
-                        cadastroDeUsuarioForm.getNumero(),
-                        cadastroDeUsuarioForm.getCidade(),
-                        cadastroDeUsuarioForm.getComplemento()
-        ));
+        aluno.setEndereco(new Endereco
+                (cadastroDeUsuarioForm.getLogradouro(),
+                cadastroDeUsuarioForm.getCep(),
+                cadastroDeUsuarioForm.getNumero(),
+                cadastroDeUsuarioForm.getCidade(),
+                cadastroDeUsuarioForm.getComplemento()));
         aluno.setTelefone(cadastroDeUsuarioForm.getTelefone());
         cadastroDeUsuarioForm.getTiposCNH().forEach(t -> aluno.addTipoCNH(TipoCNH.valueOf(t)));
         return usuarioRepository.save(aluno);

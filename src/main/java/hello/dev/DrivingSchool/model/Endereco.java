@@ -4,12 +4,12 @@ import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Endereco {
-
     private String logradouro;
     private String CEP;
     private Integer numero;
     private String cidade;
     private String complemento;
+//    private String estado;
 
     public Endereco() {
     }

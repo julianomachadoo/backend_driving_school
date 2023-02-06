@@ -5,12 +5,12 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity @Table(name = "usuario")
+@Entity @Table(name = "tbl_usuario")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_de_usuario", discriminatorType = DiscriminatorType.STRING)
 public class Usuario {
-
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column (name = "id_usuario")
     private Long id;
     private String nome;
     private String email;

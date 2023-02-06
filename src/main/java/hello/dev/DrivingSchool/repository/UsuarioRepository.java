@@ -13,12 +13,8 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
     List<Usuario> findByNomeContainingIgnoreCase(String nome);
-
     Optional<Usuario> findByCpf(String cpf);
-
     List<Usuario> findByEmailContainingIgnoreCase(String email);
-
     @Query(value = "select u from Usuario u where u.dataCadastro BETWEEN :startDate AND :endDate")
     List<Usuario> encontrarPorData(@Param("startDate") LocalDate startDate, @Param("endDate") LocalDate endDate);
-
 }

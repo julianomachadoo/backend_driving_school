@@ -8,7 +8,6 @@ import java.util.Set;
 @Entity
 @DiscriminatorValue("aluno")
 public class Aluno extends Usuario {
-
     @ElementCollection(targetClass = TipoCNH.class)
     @JoinTable(name = "tblTipoCNH", joinColumns = @JoinColumn(name = "idAluno"))
     @Column(name = "tipoCNH", nullable = false)
@@ -25,5 +24,4 @@ public class Aluno extends Usuario {
     public void addTipoCNH(TipoCNH tipoCNH) {
         tipoCNHList.add(tipoCNH);
     }
-
 }

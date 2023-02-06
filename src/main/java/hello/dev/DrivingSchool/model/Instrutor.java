@@ -6,7 +6,6 @@ import jakarta.persistence.Entity;
 @Entity
 @DiscriminatorValue("instrutor")
 public class Instrutor extends Usuario {
-
     public Instrutor() {
     }
 }
