@@ -1,4 +1,4 @@
-package hello.dev.DrivingSchool.rest.form;
+package hello.dev.DrivingSchool.model.form;
 
 public class LoginUsuarioForm {
 

@@ -5,9 +5,8 @@ import jakarta.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
-@DiscriminatorValue("aluno")
-public class Aluno extends Usuario {
+
+public class Aluno {
     @ElementCollection(targetClass = TipoCNH.class)
     @JoinTable(name = "tblTipoCNH", joinColumns = @JoinColumn(name = "idAluno"))
     @Column(name = "tipoCNH", nullable = false)

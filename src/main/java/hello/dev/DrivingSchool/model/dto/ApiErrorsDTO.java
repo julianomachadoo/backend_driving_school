@@ -1,4 +1,4 @@
-package hello.dev.DrivingSchool.rest.dto;
+package hello.dev.DrivingSchool.model.dto;
 
 public class ApiErrorsDTO {
 

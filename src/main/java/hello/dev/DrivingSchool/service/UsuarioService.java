@@ -2,7 +2,7 @@ package hello.dev.DrivingSchool.service;
 
 import hello.dev.DrivingSchool.model.Usuario;
 import hello.dev.DrivingSchool.repository.UsuarioRepository;
-import hello.dev.DrivingSchool.rest.form.CadastroDeUsuarioForm;
+import hello.dev.DrivingSchool.model.form.CadastroDeUsuarioForm;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;

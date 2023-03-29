@@ -1,45 +1,38 @@
-package hello.dev.DrivingSchool.rest.dto;
+package hello.dev.DrivingSchool.model;
 
-import hello.dev.DrivingSchool.model.Endereco;
-import hello.dev.DrivingSchool.model.TipoCNH;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Objects;
 
-public class UsuarioDTO {
+@Entity
+public class DadosUsuario extends Usuario {
 
-    private Long id;
     private String nome;
-    private String email;
-    private String senha;
     private String cpf;
     private LocalDate dataDeNascimento;
-    private LocalDate dataCadastro;
+    private LocalDate dataCadastro = LocalDate.now();
+    @Embedded
     private Endereco endereco;
     private String telefone;
-    private String tipoUsuario;
-    private Set<TipoCNH> tipoCNHList = new HashSet<>();
+    @Enumerated(EnumType.STRING)
+    private TipoCNH tipoCNH;
 
-    public UsuarioDTO(Long id, String nome, String email, String senha, String cpf, LocalDate dataDeNascimento, LocalDate dataCadastro, Endereco endereco, String telefone, String tipoUsuario) {
-        this.id = id;
+    public DadosUsuario() {
+    }
+
+    public DadosUsuario(String email, String senha, TipoUsuario tipoUsuario, String nome, String cpf, LocalDate dataDeNascimento, LocalDate dataCadastro, Endereco endereco, String telefone, TipoCNH tipoCNH) {
+        super(email, senha, tipoUsuario);
         this.nome = nome;
-        this.email = email;
-        this.senha = senha;
         this.cpf = cpf;
         this.dataDeNascimento = dataDeNascimento;
         this.dataCadastro = dataCadastro;
         this.endereco = endereco;
         this.telefone = telefone;
-        this.tipoUsuario = tipoUsuario;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.tipoCNH = tipoCNH;
     }
 
     public String getNome() {
@@ -48,22 +41,6 @@ public class UsuarioDTO {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     public String getCpf() {
@@ -106,15 +83,25 @@ public class UsuarioDTO {
         this.telefone = telefone;
     }
 
-    public String getTipoUsuario() {
-        return tipoUsuario;
+    public TipoCNH getTipoCNH() {
+        return tipoCNH;
     }
 
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+    public void setTipoCNH(TipoCNH tipoCNH) {
+        this.tipoCNH = tipoCNH;
     }
 
-    public Set<TipoCNH> getTipoCNHList() {
-        return tipoCNHList;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        DadosUsuario that = (DadosUsuario) o;
+        return Objects.equals(cpf, that.cpf);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), cpf);
     }
 }

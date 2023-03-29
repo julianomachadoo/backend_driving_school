@@ -1,7 +1,7 @@
-package hello.dev.DrivingSchool.rest.controller;
+package hello.dev.DrivingSchool.controller;
 
 import hello.dev.DrivingSchool.exceptions.DadosNaoEncontradosException;
-import hello.dev.DrivingSchool.rest.dto.ApiErrorsDTO;
+import hello.dev.DrivingSchool.model.dto.ApiErrorsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;

@@ -2,39 +2,31 @@ package hello.dev.DrivingSchool.model;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity @Table(name = "tbl_usuario")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipo_de_usuario", discriminatorType = DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Usuario {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id_usuario")
     private Long id;
-    private String nome;
     private String email;
     private String senha;
-    private String cpf;
-    private LocalDate dataDeNascimento;
-    private LocalDate dataCadastro = LocalDate.now();
-    @Embedded
-    private Endereco endereco;
-    private String telefone;
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipoUsuario;
+
 
     public Usuario() {
     }
 
+    public Usuario(String email, String senha, TipoUsuario tipoUsuario) {
+        this.email = email;
+        this.senha = senha;
+        this.tipoUsuario = tipoUsuario;
+    }
+
     public Long getId() {
         return id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public String getEmail() {
@@ -53,44 +45,12 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public String getCpf() {
-        return cpf;
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public LocalDate getDataDeNascimento() {
-        return dataDeNascimento;
-    }
-
-    public void setDataDeNascimento(LocalDate dataDeNascimento) {
-        this.dataDeNascimento = dataDeNascimento;
-    }
-
-    public LocalDate getDataCadastro() {
-        return dataCadastro;
-    }
-
-    public void setDataCadastro(LocalDate dataCadastro) {
-        this.dataCadastro = dataCadastro;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
     }
 
     @Override
@@ -98,11 +58,11 @@ public class Usuario {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Usuario usuario = (Usuario) o;
-        return Objects.equals(cpf, usuario.cpf);
+        return Objects.equals(id, usuario.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cpf);
+        return Objects.hash(id);
     }
 }
