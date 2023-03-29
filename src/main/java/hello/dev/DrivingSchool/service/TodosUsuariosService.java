@@ -7,12 +7,14 @@ import hello.dev.DrivingSchool.model.Usuario;
 import hello.dev.DrivingSchool.rest.dto.UsuarioDTO;
 import hello.dev.DrivingSchool.rest.form.AtualizaUsuarioForm;
 import hello.dev.DrivingSchool.rest.form.CadastroDeUsuarioForm;
+import hello.dev.DrivingSchool.rest.form.LoginUsuarioForm;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -111,5 +113,12 @@ public class TodosUsuariosService extends UsuarioService {
             ((Aluno) usuario).getTipoCNHList().forEach(tipoCNH -> usuarioDTO.getTipoCNHList().add(tipoCNH));
         }
         return usuarioDTO;
+    }
+
+    public void login(LoginUsuarioForm loginUsuario) {
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(loginUsuario.getEmail());
+        if (usuario.isEmpty()) throw new DadosNaoEncontradosException("Usuario ou senha inválidos");
+        if (!Objects.equals(usuario.get().getSenha(), loginUsuario.getSenha()))
+            throw new DadosNaoEncontradosException("Usuario ou senha inválidos");
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,5 +40,11 @@ public class ApplicationControllerAdvice {
     @ResponseStatus(code = BAD_REQUEST)
     public ApiErrorsDTO handleDadosNaoEncontradosException(DadosNaoEncontradosException ex) {
         return new ApiErrorsDTO(null, ex.getMessage());
+    }
+
+    @ExceptionHandler(DateTimeException.class)
+    @ResponseStatus(code = BAD_REQUEST)
+    public ApiErrorsDTO handleDataInvalidaException(DadosNaoEncontradosException ex) {
+        return new ApiErrorsDTO("data", "Data inválida");
     }
 }

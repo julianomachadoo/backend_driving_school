@@ -21,7 +21,8 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("usuario")
+@RequestMapping("usuarios")
+@CrossOrigin
 public class UsuarioController {
 
     @Autowired
