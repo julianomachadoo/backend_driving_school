@@ -5,8 +5,6 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.Length;
 
-import java.util.List;
-
 public class CadastroDeUsuarioForm {
 
     @NotBlank
@@ -34,9 +32,27 @@ public class CadastroDeUsuarioForm {
     @Pattern(regexp = "\\d{2,8}", message = "Numero inválido")
     private String numero;
     private String cidade;
+    private String estado;
     private String complemento;
     private String tipoUsuario;
-    private List<String> tiposCNH;
+    private String tipoCNH;
+
+    public CadastroDeUsuarioForm(String nome, String email, String senha, String cpf, String dataDeNascimento, String telefone, String logradouro, String cep, String numero, String cidade, String estado, String complemento, String tipoUsuario, String tipoCNH) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.dataDeNascimento = dataDeNascimento;
+        this.telefone = telefone;
+        this.logradouro = logradouro;
+        this.cep = cep;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.complemento = complemento;
+        this.tipoUsuario = tipoUsuario;
+        this.tipoCNH = tipoCNH;
+    }
 
     public String getNome() {
         return nome;
@@ -78,6 +94,10 @@ public class CadastroDeUsuarioForm {
         return cidade;
     }
 
+    public String getEstado() {
+        return estado;
+    }
+
     public String getComplemento() {
         return complemento;
     }
@@ -86,7 +106,7 @@ public class CadastroDeUsuarioForm {
         return tipoUsuario;
     }
 
-    public List<String> getTiposCNH() {
-        return tiposCNH;
+    public String getTipoCNH() {
+        return tipoCNH;
     }
 }

@@ -24,12 +24,11 @@ public class DadosUsuario extends Usuario {
     public DadosUsuario() {
     }
 
-    public DadosUsuario(String email, String senha, TipoUsuario tipoUsuario, String nome, String cpf, LocalDate dataDeNascimento, LocalDate dataCadastro, Endereco endereco, String telefone, TipoCNH tipoCNH) {
+    public DadosUsuario(String email, String senha, TipoUsuario tipoUsuario, String nome, String cpf, LocalDate dataDeNascimento, Endereco endereco, String telefone, TipoCNH tipoCNH) {
         super(email, senha, tipoUsuario);
         this.nome = nome;
         this.cpf = cpf;
         this.dataDeNascimento = dataDeNascimento;
-        this.dataCadastro = dataCadastro;
         this.endereco = endereco;
         this.telefone = telefone;
         this.tipoCNH = tipoCNH;

@@ -4,4 +4,7 @@ public enum TipoUsuario {
     ALUNO,
     INSTRUTOR,
     ADMINISTRATIVO;
+
+    TipoUsuario() {
+    }
 }
