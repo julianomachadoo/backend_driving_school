@@ -1,5 +1,6 @@
 package hello.dev.DrivingSchool;
 
+import hello.dev.DrivingSchool.model.form.AtualizaUsuarioForm;
 import hello.dev.DrivingSchool.model.form.CadastroDeUsuarioForm;
 import hello.dev.DrivingSchool.repository.DadosUsuarioRepository;
 import hello.dev.DrivingSchool.repository.UsuarioRepository;
@@ -52,28 +53,37 @@ public class CommandRunner implements CommandLineRunner {
                 null
         );
         usuarioService.cadastrar(instrutor);
-//
-//        Instrutor instrutor = new Instrutor();
-//        instrutor.setCpf("112.111.111-11");
-//        instrutor.setNome("Cicrano");
-//        instrutor.setDataDeNascimento(LocalDate.of(1999, 12, 12));
-//        instrutor.setEmail("cicrano@email.com");
-//        instrutor.setSenha("123456");
-//        instrutor.setTelefone("79-99999-9999");
-//        instrutor.setEndereco(
-//                new Endereco("Rua de exemplo", "49000-000", 1111, "Cidade", "complemento"));
-//        instrutor.setDataCadastro(LocalDate.of(2022, 6, 13));
-//        usuarioRepository.save(instrutor);
-//
-//        Administrativo administrativo = new Administrativo();
-//        administrativo.setCpf("113.111.111-11");
-//        administrativo.setNome("Beltrano");
-//        administrativo.setDataDeNascimento(LocalDate.of(1999, 12, 12));
-//        administrativo.setEmail("beltrano@email.com");
-//        administrativo.setSenha("123456");
-//        administrativo.setTelefone("79-99999-9999");
-//        administrativo.setEndereco(
-//                new Endereco("Rua de exemplo", "49000-000", 1111, "Cidade", "complemento"));
-//        usuarioRepository.save(administrativo);
+
+        CadastroDeUsuarioForm administrativo = new CadastroDeUsuarioForm(
+                "Beltrano",
+                "beltrano@email.com",
+                "123456",
+                "113.111.111-11",
+                "12-12-1999",
+                "79-99999-9992",
+                "Rua de exemplo2",
+                "49000-000",
+                "1111",
+                "Cidade",
+                "Estado",
+                "Complemento",
+                "ADMINISTRATIVO",
+                null
+        );
+        usuarioService.cadastrar(administrativo);
+
+        AtualizaUsuarioForm atualizaUsuarioForm = new AtualizaUsuarioForm(
+                "Nome atualizado",
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                "novo complemento"
+        );
+        usuarioService.atualizarUsuario(atualizaUsuarioForm, 1L);
     }
 }

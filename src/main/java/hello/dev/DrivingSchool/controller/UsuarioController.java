@@ -12,15 +12,6 @@ public class UsuarioController {
     @Autowired
     private TodosUsuariosService todosUsuariosService;
 
-    @Autowired
-    private AlunoService alunoService;
-
-    @Autowired
-    private InstrutorService instrutorService;
-
-    @Autowired
-    private AdministrativoService administrativoService;
-
 //    @GetMapping
 //    public List<UsuarioDTO> pesquisaPorNomeCPFOuEmail(
 //            @RequestParam(required = false) String nome,

@@ -17,7 +17,21 @@ public class AtualizaUsuarioForm {
     private String cep;
     private String numero;
     private String cidade;
+    private String estado;
     private String complemento;
+
+    public AtualizaUsuarioForm(String nome, String email, String senha, String telefone, String logradouro, String cep, String numero, String cidade, String estado, String complemento) {
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.telefone = telefone;
+        this.logradouro = logradouro;
+        this.cep = cep;
+        this.numero = numero;
+        this.cidade = cidade;
+        this.estado = estado;
+        this.complemento = complemento;
+    }
 
     public String getNome() {
         return nome;
@@ -49,6 +63,10 @@ public class AtualizaUsuarioForm {
 
     public String getCidade() {
         return cidade;
+    }
+
+    public String getEstado() {
+        return estado;
     }
 
     public String getComplemento() {
