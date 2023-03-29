@@ -1,11 +1,13 @@
 package hello.dev.DrivingSchool.service;
 
 import hello.dev.DrivingSchool.exceptions.DadosNaoEncontradosException;
-import hello.dev.DrivingSchool.model.*;
+import hello.dev.DrivingSchool.model.DadosUsuario;
+import hello.dev.DrivingSchool.model.Endereco;
+import hello.dev.DrivingSchool.model.TipoCNH;
+import hello.dev.DrivingSchool.model.TipoUsuario;
 import hello.dev.DrivingSchool.model.form.AtualizaUsuarioForm;
 import hello.dev.DrivingSchool.model.form.CadastroDeUsuarioForm;
 import hello.dev.DrivingSchool.repository.DadosUsuarioRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -41,9 +43,8 @@ public class UsuarioService {
         dadosUsuarioRepository.save(dadosUsuario);
     }
 
-    @Transactional
     public void atualizarUsuario(AtualizaUsuarioForm atualizaUsuarioForm, Long id) {
-        Optional<DadosUsuario> dadosUsuario = dadosUsuarioRepository.findById(1l);
+        Optional<DadosUsuario> dadosUsuario = dadosUsuarioRepository.findById(id);
         if (dadosUsuario.isEmpty()) throw new DadosNaoEncontradosException("Usuario não encontrado");
         if (atualizaUsuarioForm.getNome() != null) dadosUsuario.get().setNome(atualizaUsuarioForm.getNome());
         if (atualizaUsuarioForm.getEmail() != null) dadosUsuario.get().setEmail(atualizaUsuarioForm.getEmail());
@@ -57,7 +58,6 @@ public class UsuarioService {
         if (atualizaUsuarioForm.getComplemento() != null) dadosUsuario.get().getEndereco().setComplemento(atualizaUsuarioForm.getComplemento());
     }
 
-    @Transactional
         public void deletarUsuario(Long id) {
         try {
             dadosUsuarioRepository.deleteById(id);

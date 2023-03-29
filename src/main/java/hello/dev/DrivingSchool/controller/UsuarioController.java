@@ -1,7 +1,13 @@
 package hello.dev.DrivingSchool.controller;
 
-import hello.dev.DrivingSchool.service.TodosUsuariosService;
+import hello.dev.DrivingSchool.model.form.AtualizaUsuarioForm;
+import hello.dev.DrivingSchool.model.form.CadastroDeUsuarioForm;
+import hello.dev.DrivingSchool.service.UsuarioService;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -10,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class UsuarioController {
 
     @Autowired
-    private TodosUsuariosService todosUsuariosService;
+    private UsuarioService usuarioService;
 
 //    @GetMapping
 //    public List<UsuarioDTO> pesquisaPorNomeCPFOuEmail(
@@ -34,46 +40,28 @@ public class UsuarioController {
 //        return todosUsuariosService.pesquisaPorData(dataInicio, dataFim);
 //    }
 //
-//    @PostMapping
-//    @Transactional
-//    public ResponseEntity<?> cadastroDeUsuario(
-//            @RequestBody @Valid CadastroDeUsuarioForm cadastroDeUsuarioForm,
-//            UriComponentsBuilder uriComponentsBuilder) {
-//
-//        if (TipoUsuario.valueOf(cadastroDeUsuarioForm.getTipoUsuario().toUpperCase()) == TipoUsuario.ALUNO) {
-//            Usuario aluno = alunoService.cadastrar(cadastroDeUsuarioForm);
-//            URI uri = uriComponentsBuilder.path("/pessoas").buildAndExpand().toUri();
-//            return ResponseEntity.created(uri).body(aluno);
-//        }
-//
-//        if (TipoUsuario.valueOf(cadastroDeUsuarioForm.getTipoUsuario().toUpperCase()) == TipoUsuario.INSTRUTOR) {
-//            Usuario instrutor = instrutorService.cadastrar(cadastroDeUsuarioForm);
-//            URI uri = uriComponentsBuilder.path("/pessoas").buildAndExpand().toUri();
-//            return ResponseEntity.created(uri).body(instrutor);
-//        }
-//
-//        if (TipoUsuario.valueOf(cadastroDeUsuarioForm.getTipoUsuario().toUpperCase()) == TipoUsuario.ADMINISTRATIVO) {
-//            Usuario administrativo = administrativoService.cadastrar(cadastroDeUsuarioForm);
-//            URI uri = uriComponentsBuilder.path("/pessoas").buildAndExpand().toUri();
-//            return ResponseEntity.created(uri).body(administrativo);
-//        }
-//        throw new IllegalArgumentException();
-//    }
-//
-//    @PutMapping("/{id}")
-//    @Transactional
-//    @ResponseStatus(HttpStatus.NO_CONTENT)
-//    public void atualizaUsuario(
-//            @RequestBody @Valid AtualizaUsuarioForm atualizaUsuarioForm,
-//            @PathVariable String id) {
-//
-//        todosUsuariosService.atualizaUsuario(atualizaUsuarioForm, id);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    @Transactional
-//    public ResponseEntity<?> remover(@PathVariable Long id) {
-//        todosUsuariosService.removerUsuario(id);
-//        return ResponseEntity.ok().build();
-//    }
+    @PostMapping
+    @Transactional
+    public ResponseEntity<?> cadastroDeUsuario(
+            @RequestBody @Valid CadastroDeUsuarioForm cadastroDeUsuarioForm) {
+        usuarioService.cadastrar(cadastroDeUsuarioForm);
+        return ResponseEntity.ok(null);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> atualizaUsuario(
+            @RequestBody @Valid AtualizaUsuarioForm atualizaUsuarioForm,
+            @PathVariable Long id) {
+
+        usuarioService.atualizarUsuario(atualizaUsuarioForm, id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity<?> remover(@PathVariable Long id) {
+        usuarioService.deletarUsuario(id);
+        return ResponseEntity.ok().build();
+    }
 }
