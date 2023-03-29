@@ -7,6 +7,7 @@ import hello.dev.DrivingSchool.model.form.CadastroDeUsuarioForm;
 import hello.dev.DrivingSchool.repository.DadosUsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -54,6 +55,15 @@ public class UsuarioService {
         if (atualizaUsuarioForm.getCidade() != null) dadosUsuario.get().getEndereco().setCidade(atualizaUsuarioForm.getCidade());
         if (atualizaUsuarioForm.getEstado() != null) dadosUsuario.get().getEndereco().setEstado(atualizaUsuarioForm.getEstado());
         if (atualizaUsuarioForm.getComplemento() != null) dadosUsuario.get().getEndereco().setComplemento(atualizaUsuarioForm.getComplemento());
+    }
+
+    @Transactional
+        public void deletarUsuario(Long id) {
+        try {
+            dadosUsuarioRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new DadosNaoEncontradosException("Usuario não encontrado");
+        }
     }
 
     private TipoCNH cadastroCNH(String tipoCNH) {
