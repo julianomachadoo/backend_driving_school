@@ -7,7 +7,6 @@ import hello.dev.DrivingSchool.service.UsuarioService;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +29,6 @@ public class UsuarioController {
             @RequestParam(required = false) String dataInicio,
             @RequestParam(required = false) String dataFim)
     {
-
         return usuarioService.buscarPorNomeCpfEmailTipoUsuario(nome, cpf, email, tipoUsuario, dataInicio, dataFim);
     }
 
@@ -39,15 +37,6 @@ public class UsuarioController {
         return usuarioService.buscarTodos();
     }
 
-//
-//    @GetMapping("/data")
-//    public List<UsuarioDTO> pesquisaPorData(
-//            @RequestParam String dataInicio,
-//            @RequestParam String dataFim) {
-//
-//        return todosUsuariosService.pesquisaPorData(dataInicio, dataFim);
-//    }
-//
     @PostMapping
     @Transactional
     public ResponseEntity<?> cadastroDeUsuario(

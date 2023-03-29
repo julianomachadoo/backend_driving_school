@@ -1,7 +1,8 @@
 package hello.dev.DrivingSchool.service;
 
-import hello.dev.DrivingSchool.exceptions.DadosNaoEncontradosException;
-import hello.dev.DrivingSchool.infra.SpecificationUsuario;
+import hello.dev.DrivingSchool.exception.DadosNaoEncontradosException;
+import hello.dev.DrivingSchool.infra.specification.SpecificationUsuario;
+import hello.dev.DrivingSchool.infra.repository.DadosUsuarioRepository;
 import hello.dev.DrivingSchool.model.DadosUsuario;
 import hello.dev.DrivingSchool.model.Endereco;
 import hello.dev.DrivingSchool.model.TipoCNH;
@@ -9,7 +10,6 @@ import hello.dev.DrivingSchool.model.TipoUsuario;
 import hello.dev.DrivingSchool.model.dto.UsuarioDTO;
 import hello.dev.DrivingSchool.model.form.AtualizaUsuarioForm;
 import hello.dev.DrivingSchool.model.form.CadastroDeUsuarioForm;
-import hello.dev.DrivingSchool.repository.DadosUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.jpa.domain.Specification;

@@ -1,22 +1,6 @@
 package hello.dev.DrivingSchool.service;
 
-import hello.dev.DrivingSchool.exceptions.DadosNaoEncontradosException;
-import hello.dev.DrivingSchool.model.Aluno;
-import hello.dev.DrivingSchool.model.TipoUsuario;
-import hello.dev.DrivingSchool.model.Usuario;
-import hello.dev.DrivingSchool.model.dto.UsuarioDTO;
-import hello.dev.DrivingSchool.model.form.AtualizaUsuarioForm;
-import hello.dev.DrivingSchool.model.form.CadastroDeUsuarioForm;
-import hello.dev.DrivingSchool.model.form.LoginUsuarioForm;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static java.lang.Integer.parseInt;
 

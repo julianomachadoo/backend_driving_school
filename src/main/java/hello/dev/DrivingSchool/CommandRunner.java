@@ -2,8 +2,6 @@ package hello.dev.DrivingSchool;
 
 import hello.dev.DrivingSchool.model.form.AtualizaUsuarioForm;
 import hello.dev.DrivingSchool.model.form.CadastroDeUsuarioForm;
-import hello.dev.DrivingSchool.repository.DadosUsuarioRepository;
-import hello.dev.DrivingSchool.repository.UsuarioRepository;
 import hello.dev.DrivingSchool.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

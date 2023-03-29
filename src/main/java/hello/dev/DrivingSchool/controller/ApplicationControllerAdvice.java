@@ -1,6 +1,6 @@
 package hello.dev.DrivingSchool.controller;
 
-import hello.dev.DrivingSchool.exceptions.DadosNaoEncontradosException;
+import hello.dev.DrivingSchool.exception.DadosNaoEncontradosException;
 import hello.dev.DrivingSchool.model.dto.ApiErrorsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;

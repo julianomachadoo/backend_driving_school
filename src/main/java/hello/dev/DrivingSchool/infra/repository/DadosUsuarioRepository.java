@@ -1,4 +1,4 @@
-package hello.dev.DrivingSchool.repository;
+package hello.dev.DrivingSchool.infra.repository;
 
 import hello.dev.DrivingSchool.model.DadosUsuario;
 import org.springframework.data.jpa.repository.JpaRepository;

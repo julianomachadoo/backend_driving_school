@@ -1,8 +1,7 @@
-package hello.dev.DrivingSchool.infra;
+package hello.dev.DrivingSchool.infra.specification;
 
 import hello.dev.DrivingSchool.model.DadosUsuario;
 import hello.dev.DrivingSchool.model.TipoUsuario;
-import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.time.LocalDate;
