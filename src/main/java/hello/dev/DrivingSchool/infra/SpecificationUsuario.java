@@ -2,9 +2,13 @@ package hello.dev.DrivingSchool.infra;
 
 import hello.dev.DrivingSchool.model.DadosUsuario;
 import hello.dev.DrivingSchool.model.TipoUsuario;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.time.LocalDate;
+
 public class SpecificationUsuario {
+
 
     public static Specification<DadosUsuario> nome(String nome) {
         return (root, criteriaQuery, criteriaBuilder) -> {
@@ -31,6 +35,15 @@ public class SpecificationUsuario {
         return (root, criteriaQuery, criteriaBuilder) -> {
             if (tipoUsuario == null) return criteriaBuilder.disjunction();
             return criteriaBuilder.equal((root.get("tipoUsuario")), tipoUsuario);
+        };
+    }
+
+    public static Specification<DadosUsuario> dataCadastro(LocalDate dataInicio, LocalDate dataFinal) {
+        if (dataFinal == null) dataFinal = LocalDate.now();
+        LocalDate finalDataFinal = dataFinal;
+        return (root, criteriaQuery, criteriaBuilder) -> {
+            if (dataInicio == null) return criteriaBuilder.disjunction();
+            return criteriaBuilder.between(root.get("dataCadastro"), dataInicio, finalDataFinal);
         };
     }
 }

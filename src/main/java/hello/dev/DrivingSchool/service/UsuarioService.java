@@ -31,12 +31,17 @@ public class UsuarioService {
         return dadosUsuarioRepository.findAll().stream().map(UsuarioDTO::new).toList();
     }
 
-    public List<UsuarioDTO> buscarPorNomeCpfEmailTipoUsuario(String nome, String cpf, String email, String tipoUsuario) {
+    public List<UsuarioDTO> buscarPorNomeCpfEmailTipoUsuario(String nome, String cpf, String email, String tipoUsuario, String dataInicio, String dataFim) {
+        TipoUsuario tipoUsuarioUpperCase;
+        if (tipoUsuario == null) tipoUsuarioUpperCase = null;
+        else tipoUsuarioUpperCase = TipoUsuario.valueOf(tipoUsuario.toUpperCase());
+
         return dadosUsuarioRepository
                 .findAll(Specification.where(SpecificationUsuario.nome(nome))
                         .or(SpecificationUsuario.cpf(cpf))
                         .or(SpecificationUsuario.email(email))
-                        .or(SpecificationUsuario.tipoUsuario(TipoUsuario.valueOf(tipoUsuario.toUpperCase())))
+                        .or(SpecificationUsuario.tipoUsuario(tipoUsuarioUpperCase))
+                        .or(SpecificationUsuario.dataCadastro(converterData(dataInicio), converterData(dataFim)))
                 ).stream().map(UsuarioDTO::new).toList();
     }
 
@@ -89,6 +94,7 @@ public class UsuarioService {
     }
 
     protected LocalDate converterData (String data) {
+        if (data == null) return null;
         String[] split = data.split("-");
         return LocalDate.of(parseInt(split[2]), parseInt(split[1]), parseInt(split[0]));
     }

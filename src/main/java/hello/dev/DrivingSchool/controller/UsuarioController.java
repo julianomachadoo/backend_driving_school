@@ -26,9 +26,12 @@ public class UsuarioController {
             @RequestParam(required = false) String nome,
             @RequestParam(required = false) String cpf,
             @RequestParam(required = false) String email,
-            @RequestParam(required = false) String tipoUsuario) {
+            @RequestParam(required = false) String tipoUsuario,
+            @RequestParam(required = false) String dataInicio,
+            @RequestParam(required = false) String dataFim)
+    {
 
-        return usuarioService.buscarPorNomeCpfEmailTipoUsuario(nome, cpf, email, tipoUsuario);
+        return usuarioService.buscarPorNomeCpfEmailTipoUsuario(nome, cpf, email, tipoUsuario, dataInicio, dataFim);
     }
 
     @GetMapping("/todos")
