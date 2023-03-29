@@ -1,11 +1,9 @@
 package hello.dev.DrivingSchool.model.dto;
 
+import hello.dev.DrivingSchool.model.DadosUsuario;
 import hello.dev.DrivingSchool.model.Endereco;
-import hello.dev.DrivingSchool.model.TipoCNH;
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.Set;
 
 public class UsuarioDTO {
 
@@ -19,19 +17,20 @@ public class UsuarioDTO {
     private Endereco endereco;
     private String telefone;
     private String tipoUsuario;
-    private Set<TipoCNH> tipoCNHList = new HashSet<>();
+    private String tipoCNH;
 
-    public UsuarioDTO(Long id, String nome, String email, String senha, String cpf, LocalDate dataDeNascimento, LocalDate dataCadastro, Endereco endereco, String telefone, String tipoUsuario) {
-        this.id = id;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-        this.cpf = cpf;
-        this.dataDeNascimento = dataDeNascimento;
-        this.dataCadastro = dataCadastro;
-        this.endereco = endereco;
-        this.telefone = telefone;
-        this.tipoUsuario = tipoUsuario;
+    public UsuarioDTO(DadosUsuario dadosUsuario) {
+        this.id = dadosUsuario.getId();
+        this.nome = dadosUsuario.getNome();
+        this.email = dadosUsuario.getEmail();
+        this.senha = dadosUsuario.getSenha();
+        this.cpf = dadosUsuario.getCpf();
+        this.dataDeNascimento = dadosUsuario.getDataDeNascimento();
+        this.dataCadastro = dadosUsuario.getDataCadastro();
+        this.endereco = dadosUsuario.getEndereco();
+        this.telefone = dadosUsuario.getTelefone();
+        this.tipoUsuario = dadosUsuario.getTipoUsuario().toString();
+        this.tipoCNH = String.valueOf(dadosUsuario.getTipoCNH());
     }
 
     public Long getId() {
@@ -114,7 +113,11 @@ public class UsuarioDTO {
         this.tipoUsuario = tipoUsuario;
     }
 
-    public Set<TipoCNH> getTipoCNHList() {
-        return tipoCNHList;
+    public String getTipoCNH() {
+        return tipoCNH;
+    }
+
+    public void setTipoCNH(String tipoCNH) {
+        this.tipoCNH = tipoCNH;
     }
 }

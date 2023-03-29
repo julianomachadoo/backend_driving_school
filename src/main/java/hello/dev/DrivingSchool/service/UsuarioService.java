@@ -1,18 +1,22 @@
 package hello.dev.DrivingSchool.service;
 
 import hello.dev.DrivingSchool.exceptions.DadosNaoEncontradosException;
+import hello.dev.DrivingSchool.infra.SpecificationUsuario;
 import hello.dev.DrivingSchool.model.DadosUsuario;
 import hello.dev.DrivingSchool.model.Endereco;
 import hello.dev.DrivingSchool.model.TipoCNH;
 import hello.dev.DrivingSchool.model.TipoUsuario;
+import hello.dev.DrivingSchool.model.dto.UsuarioDTO;
 import hello.dev.DrivingSchool.model.form.AtualizaUsuarioForm;
 import hello.dev.DrivingSchool.model.form.CadastroDeUsuarioForm;
 import hello.dev.DrivingSchool.repository.DadosUsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 import static java.lang.Integer.parseInt;
@@ -22,6 +26,19 @@ public class UsuarioService {
 
     @Autowired
     private DadosUsuarioRepository dadosUsuarioRepository;
+
+    public List<UsuarioDTO> buscarTodos() {
+        return dadosUsuarioRepository.findAll().stream().map(UsuarioDTO::new).toList();
+    }
+
+    public List<UsuarioDTO> buscarPorNomeCpfEmailTipoUsuario(String nome, String cpf, String email, String tipoUsuario) {
+        return dadosUsuarioRepository
+                .findAll(Specification.where(SpecificationUsuario.nome(nome))
+                        .or(SpecificationUsuario.cpf(cpf))
+                        .or(SpecificationUsuario.email(email))
+                        .or(SpecificationUsuario.tipoUsuario(TipoUsuario.valueOf(tipoUsuario.toUpperCase())))
+                ).stream().map(UsuarioDTO::new).toList();
+    }
 
     public void cadastrar(CadastroDeUsuarioForm cadastroDeUsuarioForm) {
         DadosUsuario dadosUsuario = new DadosUsuario(
