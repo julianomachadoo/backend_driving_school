@@ -27,9 +27,8 @@ public class UsuarioController {
             @RequestParam(required = false) String email,
             @RequestParam(required = false) String tipoUsuario,
             @RequestParam(required = false) String dataInicio,
-            @RequestParam(required = false) String dataFim)
-    {
-        return usuarioService.buscarPorNomeCpfEmailTipoUsuario(nome, cpf, email, tipoUsuario, dataInicio, dataFim);
+            @RequestParam(required = false) String dataFim) {
+        return usuarioService.buscarPorNomeCpfEmailTipoUsuarioDataCadastro(nome, cpf, email, tipoUsuario, dataInicio, dataFim);
     }
 
     @GetMapping("/todos")
@@ -50,7 +49,6 @@ public class UsuarioController {
     public ResponseEntity<?> atualizaUsuario(
             @RequestBody @Valid AtualizaUsuarioForm atualizaUsuarioForm,
             @PathVariable Long id) {
-
         usuarioService.atualizarUsuario(atualizaUsuarioForm, id);
         return ResponseEntity.noContent().build();
     }

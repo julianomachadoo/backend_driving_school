@@ -31,7 +31,7 @@ public class UsuarioService {
         return dadosUsuarioRepository.findAll().stream().map(UsuarioDTO::new).toList();
     }
 
-    public List<UsuarioDTO> buscarPorNomeCpfEmailTipoUsuario(String nome, String cpf, String email, String tipoUsuario, String dataInicio, String dataFim) {
+    public List<UsuarioDTO> buscarPorNomeCpfEmailTipoUsuarioDataCadastro(String nome, String cpf, String email, String tipoUsuario, String dataInicio, String dataFim) {
         TipoUsuario tipoUsuarioUpperCase;
         if (tipoUsuario == null) tipoUsuarioUpperCase = null;
         else tipoUsuarioUpperCase = TipoUsuario.valueOf(tipoUsuario.toUpperCase());
@@ -41,8 +41,8 @@ public class UsuarioService {
                         .or(SpecificationUsuario.cpf(cpf))
                         .or(SpecificationUsuario.email(email))
                         .or(SpecificationUsuario.tipoUsuario(tipoUsuarioUpperCase))
-                        .or(SpecificationUsuario.dataCadastro(converterData(dataInicio), converterData(dataFim)))
-                ).stream().map(UsuarioDTO::new).toList();
+                        .or(SpecificationUsuario.dataCadastro(converterData(dataInicio), converterData(dataFim))))
+                .stream().map(UsuarioDTO::new).toList();
     }
 
     public void cadastrar(CadastroDeUsuarioForm cadastroDeUsuarioForm) {
@@ -71,16 +71,22 @@ public class UsuarioService {
         if (atualizaUsuarioForm.getNome() != null) dadosUsuario.get().setNome(atualizaUsuarioForm.getNome());
         if (atualizaUsuarioForm.getEmail() != null) dadosUsuario.get().setEmail(atualizaUsuarioForm.getEmail());
         if (atualizaUsuarioForm.getSenha() != null) dadosUsuario.get().setSenha(atualizaUsuarioForm.getSenha());
-        if (atualizaUsuarioForm.getTelefone() != null) dadosUsuario.get().setTelefone(atualizaUsuarioForm.getTelefone());
-        if (atualizaUsuarioForm.getLogradouro() != null) dadosUsuario.get().getEndereco().setLogradouro(atualizaUsuarioForm.getLogradouro());
+        if (atualizaUsuarioForm.getTelefone() != null)
+            dadosUsuario.get().setTelefone(atualizaUsuarioForm.getTelefone());
+        if (atualizaUsuarioForm.getLogradouro() != null)
+            dadosUsuario.get().getEndereco().setLogradouro(atualizaUsuarioForm.getLogradouro());
         if (atualizaUsuarioForm.getCep() != null) dadosUsuario.get().getEndereco().setCEP(atualizaUsuarioForm.getCep());
-        if (atualizaUsuarioForm.getNumero() != null) dadosUsuario.get().getEndereco().setNumero(parseInt(atualizaUsuarioForm.getNumero()));
-        if (atualizaUsuarioForm.getCidade() != null) dadosUsuario.get().getEndereco().setCidade(atualizaUsuarioForm.getCidade());
-        if (atualizaUsuarioForm.getEstado() != null) dadosUsuario.get().getEndereco().setEstado(atualizaUsuarioForm.getEstado());
-        if (atualizaUsuarioForm.getComplemento() != null) dadosUsuario.get().getEndereco().setComplemento(atualizaUsuarioForm.getComplemento());
+        if (atualizaUsuarioForm.getNumero() != null)
+            dadosUsuario.get().getEndereco().setNumero(parseInt(atualizaUsuarioForm.getNumero()));
+        if (atualizaUsuarioForm.getCidade() != null)
+            dadosUsuario.get().getEndereco().setCidade(atualizaUsuarioForm.getCidade());
+        if (atualizaUsuarioForm.getEstado() != null)
+            dadosUsuario.get().getEndereco().setEstado(atualizaUsuarioForm.getEstado());
+        if (atualizaUsuarioForm.getComplemento() != null)
+            dadosUsuario.get().getEndereco().setComplemento(atualizaUsuarioForm.getComplemento());
     }
 
-        public void deletarUsuario(Long id) {
+    public void deletarUsuario(Long id) {
         try {
             dadosUsuarioRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
@@ -93,7 +99,7 @@ public class UsuarioService {
         return TipoCNH.valueOf(tipoCNH.toUpperCase());
     }
 
-    protected LocalDate converterData (String data) {
+    private LocalDate converterData(String data) {
         if (data == null) return null;
         String[] split = data.split("-");
         return LocalDate.of(parseInt(split[2]), parseInt(split[1]), parseInt(split[0]));
