@@ -20,8 +20,13 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
+    @GetMapping("/todos")
+    public List<UsuarioDTO> pesquisarTodos() {
+        return usuarioService.buscarTodos();
+    }
+
     @GetMapping
-    public List<UsuarioDTO> pesquisaPorNomeCPFOuEmail(
+    public List<UsuarioDTO> pesquisaPorNomeCPFEmailTipoUsuarioDataCadastro(
             @RequestParam(required = false) String nome,
             @RequestParam(required = false) String cpf,
             @RequestParam(required = false) String email,
@@ -29,11 +34,6 @@ public class UsuarioController {
             @RequestParam(required = false) String dataInicio,
             @RequestParam(required = false) String dataFim) {
         return usuarioService.buscarPorNomeCpfEmailTipoUsuarioDataCadastro(nome, cpf, email, tipoUsuario, dataInicio, dataFim);
-    }
-
-    @GetMapping("/todos")
-    public List<UsuarioDTO> pesquisarTodos() {
-        return usuarioService.buscarTodos();
     }
 
     @PostMapping

@@ -31,17 +31,15 @@ public class UsuarioService {
         return dadosUsuarioRepository.findAll().stream().map(UsuarioDTO::new).toList();
     }
 
-    public List<UsuarioDTO> buscarPorNomeCpfEmailTipoUsuarioDataCadastro(String nome, String cpf, String email, String tipoUsuario, String dataInicio, String dataFim) {
-        TipoUsuario tipoUsuarioUpperCase;
-        if (tipoUsuario == null) tipoUsuarioUpperCase = null;
-        else tipoUsuarioUpperCase = TipoUsuario.valueOf(tipoUsuario.toUpperCase());
-
+    public List<UsuarioDTO> buscarPorNomeCpfEmailTipoUsuarioDataCadastro(
+            String nome, String cpf, String email, String tipoUsuario, String dataInicio, String dataFim) {
         return dadosUsuarioRepository
-                .findAll(Specification.where(SpecificationUsuario.nome(nome))
+                .findAll(Specification
+                        .where(SpecificationUsuario.nome(nome))
                         .or(SpecificationUsuario.cpf(cpf))
                         .or(SpecificationUsuario.email(email))
-                        .or(SpecificationUsuario.tipoUsuario(tipoUsuarioUpperCase))
-                        .or(SpecificationUsuario.dataCadastro(converterData(dataInicio), converterData(dataFim))))
+                        .or(SpecificationUsuario.tipoUsuario((tipoUsuario == null) ? null : TipoUsuario.valueOf(tipoUsuario.toUpperCase()))
+                        .or(SpecificationUsuario.dataCadastro(converterData(dataInicio), converterData(dataFim)))))
                 .stream().map(UsuarioDTO::new).toList();
     }
 
@@ -60,7 +58,7 @@ public class UsuarioService {
                         cadastroDeUsuarioForm.getEstado(),
                         cadastroDeUsuarioForm.getComplemento()),
                 cadastroDeUsuarioForm.getTelefone(),
-                cadastroCNH(cadastroDeUsuarioForm.getTipoCNH())
+                (cadastroDeUsuarioForm.getTipoCNH() == null) ? null : TipoCNH.valueOf(cadastroDeUsuarioForm.getTipoCNH().toUpperCase())
         );
         dadosUsuarioRepository.save(dadosUsuario);
     }
@@ -92,11 +90,6 @@ public class UsuarioService {
         } catch (EmptyResultDataAccessException e) {
             throw new DadosNaoEncontradosException("Usuario não encontrado");
         }
-    }
-
-    private TipoCNH cadastroCNH(String tipoCNH) {
-        if (tipoCNH == null) return null;
-        return TipoCNH.valueOf(tipoCNH.toUpperCase());
     }
 
     private LocalDate converterData(String data) {

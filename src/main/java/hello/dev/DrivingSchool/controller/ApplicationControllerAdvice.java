@@ -47,4 +47,10 @@ public class ApplicationControllerAdvice {
     public ApiErrorsDTO handleDataInvalidaException(DadosNaoEncontradosException ex) {
         return new ApiErrorsDTO("data", "Data inválida");
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    @ResponseStatus(code = BAD_REQUEST)
+    public ApiErrorsDTO handleIllegalArgumentException(IllegalArgumentException ex) {
+        return new ApiErrorsDTO(null, "Dados inválidos");
+    }
 }

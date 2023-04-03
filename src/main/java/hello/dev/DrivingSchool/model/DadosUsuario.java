@@ -1,14 +1,11 @@
 package hello.dev.DrivingSchool.model;
 
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Objects;
 
-@Entity
+@Entity @Table(name = "tbl_dados_usuario")
 public class DadosUsuario extends Usuario {
 
     private String nome;

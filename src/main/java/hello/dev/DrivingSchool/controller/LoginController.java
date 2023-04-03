@@ -1,9 +1,5 @@
 package hello.dev.DrivingSchool.controller;
 
-import hello.dev.DrivingSchool.model.form.LoginUsuarioForm;
-import hello.dev.DrivingSchool.service.TodosUsuariosService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,14 +7,4 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin
 public class LoginController {
 
-//    @Autowired
-//    private TodosUsuariosService todosUsuariosService;
-//
-//    @PostMapping
-//    public ResponseEntity<?> login(
-//            @RequestBody LoginUsuarioForm loginUsuario
-//    ) {
-//        todosUsuariosService.login(loginUsuario);
-//        return ResponseEntity.ok(null);
-//    }
 }

@@ -6,19 +6,19 @@ import org.hibernate.validator.constraints.Length;
 public class AtualizaUsuarioForm {
 
     @Length(max = 50)
-    private String nome;
+    private final String nome;
     @Pattern(regexp = "^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email inválido!")
-    private String email;
-    private String senha;
+    private final String email;
+    private final String senha;
     @Pattern(regexp = "\\d{10,11}", message = "Telefone inválido")
-    private String telefone;
-    private String logradouro;
+    private final String telefone;
+    private final String logradouro;
     @Pattern(regexp = "\\d{5}-\\d{3}", message = "CEP inválido")
-    private String cep;
-    private String numero;
-    private String cidade;
-    private String estado;
-    private String complemento;
+    private final String cep;
+    private final String numero;
+    private final String cidade;
+    private final String estado;
+    private final String complemento;
 
     public AtualizaUsuarioForm(String nome, String email, String senha, String telefone, String logradouro, String cep, String numero, String cidade, String estado, String complemento) {
         this.nome = nome;

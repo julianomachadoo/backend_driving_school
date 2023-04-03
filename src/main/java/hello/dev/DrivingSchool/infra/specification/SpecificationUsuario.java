@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 public class SpecificationUsuario {
 
-
     public static Specification<DadosUsuario> nome(String nome) {
         return (root, criteriaQuery, criteriaBuilder) -> {
             if (nome == null) return criteriaBuilder.disjunction();

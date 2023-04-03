@@ -9,33 +9,33 @@ public class CadastroDeUsuarioForm {
 
     @NotBlank
     @Length(max = 50)
-    private String nome;
+    private final String nome;
     @NotBlank
     @Pattern(regexp = "^[a-zA-Z0-9._]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$", message = "Email inválido!")
-    private String email;
+    private final String email;
     @NotBlank
-    private String senha;
+    private final String senha;
     @NotBlank
     @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}", message = "CPF inválido!")
 //    @CPF
-    private String cpf;
+    private final String cpf;
     @NotNull
-    private String dataDeNascimento;
+    private final String dataDeNascimento;
     @NotBlank
     @Pattern(regexp = "\\d{10,11}", message = "Telefone inválido")
-    private String telefone;
+    private final String telefone;
     @NotBlank
-    private String logradouro;
+    private final String logradouro;
     @NotBlank
     @Pattern(regexp = "\\d{5}-\\d{3}", message = "CEP inválido")
-    private String cep;
+    private final String cep;
     @Pattern(regexp = "\\d{2,8}", message = "Numero inválido")
-    private String numero;
-    private String cidade;
-    private String estado;
-    private String complemento;
-    private String tipoUsuario;
-    private String tipoCNH;
+    private final String numero;
+    private final String cidade;
+    private final String estado;
+    private final String complemento;
+    private final String tipoUsuario;
+    private final String tipoCNH;
 
     public CadastroDeUsuarioForm(String nome, String email, String senha, String cpf, String dataDeNascimento, String telefone, String logradouro, String cep, String numero, String cidade, String estado, String complemento, String tipoUsuario, String tipoCNH) {
         this.nome = nome;
