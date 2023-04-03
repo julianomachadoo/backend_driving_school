@@ -6,12 +6,15 @@ import hello.dev.DrivingSchool.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class CommandRunner implements CommandLineRunner {
 
     @Autowired
     private UsuarioService usuarioService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) {
@@ -19,7 +22,7 @@ public class CommandRunner implements CommandLineRunner {
         CadastroDeUsuarioForm aluno = new CadastroDeUsuarioForm(
                 "Fulano",
                 "fulano@email.com",
-                "123456",
+                passwordEncoder.encode("123456"),
                 "111.111.111-11",
                 "12-12-1999",
                 "79-99999-9999",
@@ -37,7 +40,7 @@ public class CommandRunner implements CommandLineRunner {
         CadastroDeUsuarioForm instrutor = new CadastroDeUsuarioForm(
                 "Cicrano",
                 "cicrano@email.com",
-                "123456",
+                passwordEncoder.encode("123456"),
                 "112.111.111-11",
                 "12-12-1999",
                 "79-99999-9991",
@@ -55,7 +58,7 @@ public class CommandRunner implements CommandLineRunner {
         CadastroDeUsuarioForm administrativo = new CadastroDeUsuarioForm(
                 "Beltrano",
                 "beltrano@email.com",
-                "123456",
+                passwordEncoder.encode("123456"),
                 "113.111.111-11",
                 "12-12-1999",
                 "79-99999-9992",
